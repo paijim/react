@@ -1,0 +1,8 @@
+global:
+  scrape_interval: 15s # Prometheus passera voir cAdvisor toutes le 15 secondes
+
+scrape_configs:
+  - job_name: 'mes-conteneurs'
+    static_configs:
+      # On lui donne l'addresse IP de votre machine et le port de cAdvisor
+      - targets: ['10.0.2.15:8082']

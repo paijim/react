@@ -1,0 +1,29 @@
+services:
+ nginx_proxy:
+   image: nginx:alpine
+   container_name: nginx_proxy
+   ports:
+     - "80:80"
+   volumes:
+     - ./nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+   depends_on:
+     - react_app
+ react_app:
+   build: .
+   container_name: react_app
+   ports:
+     - "8081:8081"
+ db:
+    image: postgres:15
+    container_name: postgres_stable
+    restart: always
+    env_file:
+      - .env
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+    ports:
+      - "5432:5432"
+    volumes:
+    - ./mon_stockage_postgres:/var/lib/postgresql/data
