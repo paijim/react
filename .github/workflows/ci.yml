@@ -1,0 +1,24 @@
+name: CI/CD Docker Build
+
+on:
+  push:
+    braches: [ "main" ] # Declenche le pipeline sur le push de la branche main
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/Checkout@v4
+
+      - name: Login to Docker hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action0v5
+        with:
+          push: true
+          tags: paijim/react:latest
