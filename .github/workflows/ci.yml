@@ -2,7 +2,7 @@ name: CI/CD Docker Build
 
 on:
   push:
-    braches: [ "main" ] # Declenche le pipeline sur le push de la branche main
+    braches: [ "main", "master" ] # Declenche le pipeline sur le push de la branche main
 
 jobs:
   build-and-push:
@@ -17,8 +17,9 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Build and push Docker image
+      - name: Build and push 
         uses: docker/build-push-action@v5
         with:
+          context: .
           push: true
           tags: paijim/react:latest
