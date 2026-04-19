@@ -2,7 +2,7 @@ name: CI/CD Docker Build
 
 on:
   push:
-    braches: [ "main", "master" ] # Declenche le pipeline sur le push de la branche main
+    branches: [ "main", "master" ] # Declenche le pipeline sur le push de la branche main
 
 jobs:
   build-and-push:
